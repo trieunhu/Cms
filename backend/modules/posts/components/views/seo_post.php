@@ -33,11 +33,11 @@
                         <?php
                         $src = "";
                         if ($model->fbimage) {
-                            $src = $model->fbimage->url;
+                            $src = $model->fbimage->getUrl();
                         }
                         ?>
                         <img id="fb-src-image" src="<?= $src ?>" style="width: 16%;" />
-                        <a onclick="showPopupImage('#input-hidden-fb-image', '#fb-src-image');" class="btn btn-default">Chọn ảnh</a>
+                        <a onclick="showPopupImage('#input-hidden-fb-image', '#fb-src-image',0);" class="btn btn-default">Chọn ảnh</a>
                         <?= $form->field($model, 'fb_image')->hiddenInput(['maxlength' => true, 'placeholder' => $model->attributeLabels()['seo_keyword'], 'id' => 'input-hidden-fb-image'])->label(FALSE); ?>
                     </div>
                     <!-- /.tab-pane -->

@@ -1,10 +1,12 @@
 var setidImage = "";
 var setUrlImage = "";
 var slider = 0;
-function showPopupImage(sid, surl, _slider) {
+var editor = null;
+function showPopupImage(sid, surl, _slider,_editor) {
     setUrlImage = surl;
     setidImage = sid;
     slider = _slider;
+    editor = _editor;
     $.ajax({
         url:  _linkHost+"/posts/images/getimage",
         type: "POST",
@@ -59,9 +61,7 @@ $(document).delegate(".delete-attachment", "click", function () {
     }
 });
 $(document).delegate(".img-upload", "click", function (event) {
-    console.log(macKeys.cmdKey + ' ' + event.ctrlKey);
     if ((!event.ctrlKey && !macKeys.cmdKey) || slider == 0) {
-        console.log('co voa day' + slider);
         $('.imageContainer .img-chon').addClass("img-chon-e");
         $('.imageContainer').removeClass("img-chon");
     }
@@ -102,6 +102,7 @@ $('#select-image').click(function () {
             if (json != null) {
                 if (slider != 2) {
                     if (json.status == 'i') {
+                        console.log('skajsja');
                         $(setUrlImage).attr('src', json.urlimage);
                         $(setidImage).val(json.id);
                         $('#chonanh').hide();
@@ -110,12 +111,12 @@ $('#select-image').click(function () {
                         $('.listSlider').html(json.html);
                     }
                 } else {
-                    var img = CKEDITOR.instances.editor.getData();
+                    console.log(editor);
+                    var img = editor.getData();
                     json.forEach(function (item, index) {
-                        console.log(item);
                         img += "<img src='" + item + "'/>";
                     });
-                    CKEDITOR.instances.editor.setData(img);
+                    editor.setData(img);
                 }
                 $('#btn-close-upimage').click();
             }
@@ -183,11 +184,11 @@ $(document).ready(function () {
     });
     obj.on('drop', function (e)
     {
-			 
+             
              $(this).css('border', '2px dotted #0B85A1');
              e.preventDefault();
              var files = e.originalEvent.dataTransfer.files;
-			 
+             
              //We need to send dropped files to Server
              handleFileUpload(files);
     });

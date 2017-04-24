@@ -1,7 +1,7 @@
 <?php 
 use mihaildev\ckeditor\CKEditor;
 ?>
-<a class="btn btn-default " onclick="showPopupImage('','',2)">Thêm ảnh</a>
+<a class="btn btn-default " onclick="showPopupImage('','',2,<?= "CKEDITOR.instances.".$field ?>)">Thêm ảnh</a>
 <?=
 $form->field($model, $field)->widget(CKEditor::className(), [
     'editorOptions' => [
@@ -9,7 +9,7 @@ $form->field($model, $field)->widget(CKEditor::className(), [
         'inline' => false, //по умолчанию false
     ],
     'options' => [
-        'id' => 'editor'
+        'id' => $field
     ]
 ]);
 ?>
