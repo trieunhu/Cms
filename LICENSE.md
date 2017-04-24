@@ -1,0 +1,3 @@
+- Thêm lựa chọn cho tạo danh mục mới
+- Tạo các nút thêm mới cho chỉnh sửa các bài viết
+- xem câu lệnh sql var_dump($menu->getCategory()->prepare(\Yii::$app->db->queryBuilder)->createCommand()->rawSql);
